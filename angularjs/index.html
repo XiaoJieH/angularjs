@@ -1,31 +1,24 @@
 <!doctype html>
-<html lang="en" ng-app = "myApp">
+<html lang="en" ng-app = "myApp" ng-controller="PhoneListCtrl">
 <head>
     <meta charset="utf-8">
-    <title>My HTML File</title>
+    <title ng-bind-template="Google Phone Gallery: {{query}}">Google Phone Gallery</title>
 </head>
-<body ng-controller="PhoneListCtrl">
- <div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span2">
-      <!--Sidebar content-->
+<body>
+ Search: <input ng-model="query">
+Sort by:
+<select ng-model="order">
+  <option value="name">Alphabetical</option>
+  <option value="age">Newest</option>
+</select>
+<p>{{orderProp}}</p>
 
-      Search: <input ng-model="query">
-
-    </div>
-    <div class="span10">
-      <!--Body content-->
-
-      <ul class="phones">
-        <li ng-repeat="phone in phones | filter:query">
-          {{phone.name}}
-        <p>{{phone.snippet}}</p>
-        </li>
-      </ul>
-
-       </div>
-  </div>
-</div>
+<ul class="phones">
+  <li ng-repeat="phone in phones | filter:query | orderBy:order">
+    {{phone.name}}
+    <p>{{phone.snippet}}</p>
+  </li>
+</ul> 
 </body>
     <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
     <script src="js/controller.js"></script>
